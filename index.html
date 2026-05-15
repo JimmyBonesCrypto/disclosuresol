@@ -361,7 +361,7 @@ animation: none !important;
   </div>
 
   <style>
-    /* 1. GLOBE FIX: Using absolute positioning to keep the right edge pinned */
+    /* GLOBE FIX: Uses "Zoom" for internal UI scaling to prevent smushing */
     .globe-container {
       width: 100%;
       max-width: 1000px;
@@ -374,40 +374,41 @@ animation: none !important;
     }
 
     .globe-frame {
-      position: absolute;
-      top: 0;
-      left: 0;
       width: 100%;
       height: 100%;
       border: none;
+      display: block;
     }
 
     @media (max-width: 768px) {
       .globe-container {
-        height: 600px;
+        height: 650px;
       }
       .globe-frame {
-        /* Pinned to top-left to avoid moving right, but scaled down slightly */
-        width: 100%;
-        height: 100%;
-        /* We remove the complex width/margin math that caused the shift */
-        transform-origin: center center;
+        /* CSS Zoom is the "magic" fix for iFrames with internal UI */
+        zoom: 0.8; 
+        -moz-transform: scale(0.8);
+        -moz-transform-origin: top center;
+        width: 125%; /* Compensate for zoom width */
+        height: 125%; /* Compensate for zoom height */
       }
     }
 
     @media (max-width: 450px) {
       .globe-container {
-        height: 550px;
-        /* Added padding at the top of the CONTAINER so the close button
-           doesn't hit the very top of your phone screen */
-        padding-top: 40px; 
+        height: 580px;
+        /* Padding at the top ensures the X-button isn't cut off by your phone's status bar/notches */
+        padding-top: 50px;
       }
       .globe-frame {
-        height: calc(100% - 40px); /* Adjust height to fit the new padding */
+        zoom: 0.7;
+        -moz-transform: scale(0.7);
+        width: 142.8%;
+        height: 142.8%;
       }
     }
 
-    /* 2. CHART & VIDEO STYLING */
+    /* CHART & VIDEO STYLING */
     .chart-outer-container, 
     .video-trailer-container {
       width: 100%;
