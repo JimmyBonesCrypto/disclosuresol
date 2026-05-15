@@ -319,7 +319,7 @@ animation: none !important;
       </div>
 
       <div class="flex flex-wrap justify-center gap-4 pt-4">
-        <a href="https://dexscreener.com/solana/FpBhnZLzHjgPrc69vkimPtHCwN4xoeX3RUhDa3Bpump" target="_blank" class="btn-alien bg-alien text-black font-bold px-8 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-alienDim transition-all flex items-center gap-2">
+        <a href="https://www.dextools.io/app/en/solana/pair-explorer/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf" target="_blank" class="btn-alien bg-alien text-black font-bold px-8 py-4 rounded-full text-sm uppercase tracking-widest hover:bg-alienDim transition-all flex items-center gap-2">
           <i data-lucide="candlestick-chart" class="w-4 h-4"></i>Live Chart
         </a>
         
@@ -347,10 +347,13 @@ animation: none !important;
       </div>
 
       <div class="chart-outer-container">
-        <div id="dexscreener-embed">
-          <iframe class="pc-chart" src="https://dexscreener.com/solana/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
-          
-          <iframe class="mobile-chart" src="https://dexscreener.com/solana/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
+        <div id="dextools-widget-container">
+          <iframe 
+            id="dextools-widget" 
+            title="DEXTools Trading Chart" 
+            src="https://www.dextools.io/widgets/en/solana/pe-light/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?theme=dark&chartType=1&chartResolution=15&drawingToolbars=false"
+            style="border:0; border-radius:12px; width:100%; height:100%;">
+          </iframe>
         </div>
       </div>
 
@@ -358,48 +361,7 @@ animation: none !important;
   </div>
 
   <style>
-    /* Chart Container Styling */
-    .chart-outer-container {
-      width: 100%;
-      max-width: 1000px;
-      margin: 2rem auto 0;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #000;
-      border: 1px solid rgba(0, 255, 102, 0.1);
-    }
-
-    #dexscreener-embed {
-      position: relative;
-      width: 100%;
-      padding-bottom: 125%; /* Mobile aspect ratio */
-    }
-
-    @media(min-width: 1400px) {
-      #dexscreener-embed {
-        padding-bottom: 65%; /* PC aspect ratio */
-      }
-    }
-
-    #dexscreener-embed iframe {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      border: 0;
-    }
-
-    /* Device-specific Visibility */
-    .mobile-chart { display: block; }
-    .pc-chart { display: none; }
-
-    @media (min-width: 768px) {
-      .mobile-chart { display: none; }
-      .pc-chart { display: block; }
-    }
-
-    /* Globe Styles */
+    /* Globe Styling */
     .globe-container {
       width: 100%;
       max-width: 1000px;
@@ -416,8 +378,35 @@ animation: none !important;
       border: none;
     }
 
+    /* DEXTools Container Styling */
+    .chart-outer-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 2rem auto 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      border: 1px solid rgba(0, 255, 102, 0.1);
+    }
+
+    #dextools-widget-container {
+      position: relative;
+      width: 100%;
+      height: 600px; /* Default height for PC */
+    }
+
+    /* Mobile Logic for Chart */
+    @media (max-width: 768px) {
+      #dextools-widget-container {
+        height: 500px; /* Slightly shorter for mobile to avoid cutoff */
+      }
+    }
+
+    /* Mobile Logic for Globe */
     @media (max-width: 450px) {
-      .globe-container { height: 450px; }
+      .globe-container {
+        height: 450px;
+      }
       .globe-frame {
         zoom: 0.75;
         -moz-transform: scale(0.75);
@@ -427,8 +416,11 @@ animation: none !important;
       }
     }
 
+    /* Tablet view for Globe */
     @media (min-width: 451px) and (max-width: 950px) {
-      .globe-container { height: 550px; }
+      .globe-container {
+        height: 550px;
+      }
     }
   </style>
 </section>
