@@ -345,18 +345,17 @@ animation: none !important;
       <div class="globe-container">
         <iframe src="https://ufo.gpt2077.com/" class="globe-frame" frameborder="0" allowfullscreen></iframe>
       </div>
-      
-      <div class="chart-container-wrapper">
-         <div id="dexscreener-embed">
-           <iframe src="https://dexscreener.com/solana/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
-         </div>
-      </div>
 
+      <div class="chart-wrapper-main">
+        <div id="dexscreener-embed">
+          <iframe src="https://dexscreener.com/solana/FpBhnZLzHjgPrc69vkimPtHCwN4xoeX3RUhDa3Bpump?embed=1&theme=dark&trades=0&info=0"></iframe>
+        </div>
+      </div>
     </div>
   </div>
 
   <style>
-    /* Globe CSS */
+    /* Globe Logic */
     .globe-container {
       width: 100%;
       max-width: 1000px;
@@ -372,22 +371,21 @@ animation: none !important;
       border: none;
     }
 
-    /* Chart CSS Fixes */
-    .chart-container-wrapper {
+    /* Chart Logic - Prevents Stretching and Loading Failures */
+    .chart-wrapper-main {
       width: 100%;
       max-width: 1000px;
       margin: 2rem auto 0;
       border-radius: 12px;
       overflow: hidden;
-      background: #0b0b0b;
       border: 1px solid rgba(0, 255, 102, 0.2);
     }
 
     #dexscreener-embed {
       position: relative;
       width: 100%;
-      /* Adjusting padding-bottom to 75% for PC prevents vertical stretching */
-      padding-bottom: 75%;
+      /* Default for Desktop */
+      padding-bottom: 60%; 
     }
 
     #dexscreener-embed iframe {
@@ -399,10 +397,10 @@ animation: none !important;
       border: 0;
     }
 
-    /* Mobile Responsive Logic */
-    @media (max-width: 450px) {
+    /* Mobile Fixes */
+    @media (max-width: 640px) {
       .globe-container {
-        height: 450px;
+        height: 400px;
       }
       .globe-frame {
         zoom: 0.75;
@@ -411,22 +409,19 @@ animation: none !important;
         width: 133.33%;
         height: 133.33%;
       }
-      /* Height fix for mobile to prevent 'loading' or scrolling issues */
+      /* Force a taller, non-stretched view on mobile */
       #dexscreener-embed {
-        padding-bottom: 140%;
+        padding-bottom: 0px;
+        height: 500px; 
       }
     }
 
-    /* Desktop Aspect Ratio Fix */
-    @media(min-width:1400px) {
-      #dexscreener-embed {
-        padding-bottom: 56.25%; /* Proper 16:9 ratio for desktop */
-      }
-    }
-
-    @media (min-width: 451px) and (max-width: 950px) {
+    @media (min-width: 641px) and (max-width: 1024px) {
       .globe-container {
-        height: 550px;
+        height: 500px;
+      }
+      #dexscreener-embed {
+        padding-bottom: 75%;
       }
     }
   </style>
