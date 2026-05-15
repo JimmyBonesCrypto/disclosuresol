@@ -346,46 +346,39 @@ animation: none !important;
         <iframe src="https://ufo.gpt2077.com/" class="globe-frame" frameborder="0" allowfullscreen></iframe>
       </div>
 
-      <div class="chart-wrapper-main">
+      <div class="chart-outer-container">
         <div id="dexscreener-embed">
-          <iframe src="https://dexscreener.com/solana/FpBhnZLzHjgPrc69vkimPtHCwN4xoeX3RUhDa3Bpump?embed=1&theme=dark&trades=0&info=0"></iframe>
+          <iframe class="pc-chart" src="https://dexscreener.com/solana/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
+          
+          <iframe class="mobile-chart" src="https://dexscreener.com/solana/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
         </div>
       </div>
+
     </div>
   </div>
 
   <style>
-    /* Globe Logic */
-    .globe-container {
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
-      background: #000;
-      border-radius: 12px;
-      overflow: hidden;
-      height: 600px;
-    }
-    .globe-frame {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-
-    /* Chart Logic - Prevents Stretching and Loading Failures */
-    .chart-wrapper-main {
+    /* Chart Container Styling */
+    .chart-outer-container {
       width: 100%;
       max-width: 1000px;
       margin: 2rem auto 0;
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid rgba(0, 255, 102, 0.2);
+      background: #000;
+      border: 1px solid rgba(0, 255, 102, 0.1);
     }
 
     #dexscreener-embed {
       position: relative;
       width: 100%;
-      /* Default for Desktop */
-      padding-bottom: 60%; 
+      padding-bottom: 125%; /* Mobile aspect ratio */
+    }
+
+    @media(min-width: 1400px) {
+      #dexscreener-embed {
+        padding-bottom: 65%; /* PC aspect ratio */
+      }
     }
 
     #dexscreener-embed iframe {
@@ -397,11 +390,34 @@ animation: none !important;
       border: 0;
     }
 
-    /* Mobile Fixes */
-    @media (max-width: 640px) {
-      .globe-container {
-        height: 400px;
-      }
+    /* Device-specific Visibility */
+    .mobile-chart { display: block; }
+    .pc-chart { display: none; }
+
+    @media (min-width: 768px) {
+      .mobile-chart { display: none; }
+      .pc-chart { display: block; }
+    }
+
+    /* Globe Styles */
+    .globe-container {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      height: 600px;
+    }
+
+    .globe-frame {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    @media (max-width: 450px) {
+      .globe-container { height: 450px; }
       .globe-frame {
         zoom: 0.75;
         -moz-transform: scale(0.75);
@@ -409,20 +425,10 @@ animation: none !important;
         width: 133.33%;
         height: 133.33%;
       }
-      /* Force a taller, non-stretched view on mobile */
-      #dexscreener-embed {
-        padding-bottom: 0px;
-        height: 500px; 
-      }
     }
 
-    @media (min-width: 641px) and (max-width: 1024px) {
-      .globe-container {
-        height: 500px;
-      }
-      #dexscreener-embed {
-        padding-bottom: 75%;
-      }
+    @media (min-width: 451px) and (max-width: 950px) {
+      .globe-container { height: 550px; }
     }
   </style>
 </section>
