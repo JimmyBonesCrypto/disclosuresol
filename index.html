@@ -345,17 +345,18 @@ animation: none !important;
       <div class="globe-container">
         <iframe src="https://ufo.gpt2077.com/" class="globe-frame" frameborder="0" allowfullscreen></iframe>
       </div>
-
-      <div id="dex-chart-section" class="pt-8">
-        <style>#dexscreener-embed{position:relative;width:100%;padding-bottom:125%;}@media(min-width:1400px){#dexscreener-embed{padding-bottom:65%;}}#dexscreener-embed iframe{position:absolute;width:100%;height:100%;top:0;left:0;border:0;border-radius:12px;}</style>
-        <div id="dexscreener-embed">
-          <iframe src="https://dexscreener.com/solana/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
-        </div>
+      
+      <div class="chart-container-wrapper">
+         <div id="dexscreener-embed">
+           <iframe src="https://dexscreener.com/solana/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?embed=1&loadChartSettings=0&trades=0&tabs=0&info=0&chartLeftToolbar=0&chartDefaultOnMobile=1&chartTheme=dark&theme=dark&chartStyle=0&chartType=usd&interval=15"></iframe>
+         </div>
       </div>
+
     </div>
   </div>
 
   <style>
+    /* Globe CSS */
     .globe-container {
       width: 100%;
       max-width: 1000px;
@@ -363,34 +364,66 @@ animation: none !important;
       background: #000;
       border-radius: 12px;
       overflow: hidden;
-      /* Maintains a consistent layout area */
       height: 600px;
     }
-
     .globe-frame {
       width: 100%;
       height: 100%;
       border: none;
     }
 
-    /* Target the narrow outer screen (Z Fold 6 / Small Phones) */
+    /* Chart CSS Fixes */
+    .chart-container-wrapper {
+      width: 100%;
+      max-width: 1000px;
+      margin: 2rem auto 0;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #0b0b0b;
+      border: 1px solid rgba(0, 255, 102, 0.2);
+    }
+
+    #dexscreener-embed {
+      position: relative;
+      width: 100%;
+      /* Adjusting padding-bottom to 75% for PC prevents vertical stretching */
+      padding-bottom: 75%;
+    }
+
+    #dexscreener-embed iframe {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      border: 0;
+    }
+
+    /* Mobile Responsive Logic */
     @media (max-width: 450px) {
       .globe-container {
-        height: 450px; /* Smaller height for the narrow view */
+        height: 450px;
       }
-
       .globe-frame {
-        /* 'Zoom' shrinks the internal UI/buttons without moving the globe */
         zoom: 0.75;
-        -moz-transform: scale(0.75); /* Firefox support */
+        -moz-transform: scale(0.75);
         -moz-transform-origin: 0 0;
-        /* We increase width/height to compensate for the 0.75 zoom */
         width: 133.33%;
         height: 133.33%;
       }
+      /* Height fix for mobile to prevent 'loading' or scrolling issues */
+      #dexscreener-embed {
+        padding-bottom: 140%;
+      }
     }
 
-    /* Tablet / Unfolded view */
+    /* Desktop Aspect Ratio Fix */
+    @media(min-width:1400px) {
+      #dexscreener-embed {
+        padding-bottom: 56.25%; /* Proper 16:9 ratio for desktop */
+      }
+    }
+
     @media (min-width: 451px) and (max-width: 950px) {
       .globe-container {
         height: 550px;
