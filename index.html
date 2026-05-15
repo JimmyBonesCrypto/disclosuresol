@@ -292,6 +292,7 @@ animation: none !important;
 <button onclick="copyContract()" class="btn-alien bg-alien/10 border border-alien/30 text-alien px-6 py-3 rounded-full text-sm font-mono font-bold tracking-wider mt-2">Copy CA</button>
 </div>
 
+
 <!-- HERO -->
 <section class="relative z-10 pt-20 sm:pt-24">
   <div class="header-image-container bg-cosmic">
@@ -350,9 +351,12 @@ animation: none !important;
         <iframe src="https://ufo.gpt2077.com/" class="globe-frame" frameborder="0" allowfullscreen></iframe>
       </div>
 
-      <!-- FORCED CHART VIEW WIDGET (Using Pair Address) -->
+      <!-- THE FIX: Direct Raydium Pair Link without extra routing -->
       <div id="dexscreener-embed" style="position:relative;width:100%;max-width:1000px;margin:2rem auto;height:600px;background:#000;border-radius:12px;overflow:hidden;border:1px solid rgba(0,255,153,0.1);">
-        <iframe src="https://dexscreener.com/solana/5Yv9t8pL6YfP8YpE4K6R8nB6mU4S4v1n1n1n1n1n1n1n?embed=1&theme=dark&trades=0&info=0" style="position:absolute;width:100%;height:100%;top:0;left:0;border:0;"></iframe>
+        <iframe 
+          src="https://dexscreener.com/solana/5Yv9t8pL6YfP8YpE4K6R8nB6mU4S4v1n1n1n1n1n1n1n?embed=1&theme=dark&trades=1" 
+          style="position:absolute;width:100%;height:100%;top:0;left:0;border:0;">
+        </iframe>
       </div>
 
     </div>
