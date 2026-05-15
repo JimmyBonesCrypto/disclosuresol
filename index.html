@@ -342,98 +342,49 @@ animation: none !important;
         </a>
       </div>
 
-      <div class="globe-container">
-        <iframe src="https://ufo.gpt2077.com/" class="globe-frame" frameborder="0" allowfullscreen></iframe>
-      </div>
-
-      <div class="chart-outer-container">
-        <div id="dextools-widget-container">
-          <iframe id="dextools-widget" title="DEXTools Trading Chart" src="https://www.dextools.io/widgets/en/solana/pe-light/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?theme=dark&chartType=1&chartResolution=15&drawingToolbars=false" style="border:0; border-radius:12px; width:100%; height:100%;"></iframe>
+      <div class="responsive-widget-container">
+        <div class="aspect-ratio-box">
+          <iframe src="https://ufo.gpt2077.com/" frameborder="0" allowfullscreen></iframe>
         </div>
       </div>
 
-      <div class="video-trailer-container">
-        <div class="video-aspect-wrapper">
+      <div class="responsive-widget-container">
+        <div class="chart-box">
+          <iframe title="DEXTools Trading Chart" src="https://www.dextools.io/widgets/en/solana/pe-light/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?theme=dark&chartType=1&chartResolution=15&drawingToolbars=false" style="border:0; width:100%; height:100%;"></iframe>
+        </div>
+      </div>
+
+      <div class="responsive-widget-container">
+        <div class="aspect-ratio-box">
           <iframe src="https://www.youtube.com/embed/SCYT8vb2siQ?si=84Wkh3JJQxOqgASt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
+
     </div>
   </div>
 
   <style>
-    /* GLOBE FIX: Uses "Zoom" for internal UI scaling to prevent smushing */
-    .globe-container {
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
-      background: #000;
-      border-radius: 12px;
-      overflow: hidden;
-      height: 700px;
-      position: relative;
-    }
-
-    .globe-frame {
-      width: 100%;
-      height: 100%;
-      border: none;
-      display: block;
-    }
-
-    @media (max-width: 768px) {
-      .globe-container {
-        height: 650px;
-      }
-      .globe-frame {
-        /* CSS Zoom is the "magic" fix for iFrames with internal UI */
-        zoom: 0.8; 
-        -moz-transform: scale(0.8);
-        -moz-transform-origin: top center;
-        width: 125%; /* Compensate for zoom width */
-        height: 125%; /* Compensate for zoom height */
-      }
-    }
-
-    @media (max-width: 450px) {
-      .globe-container {
-        height: 580px;
-        /* Padding at the top ensures the X-button isn't cut off by your phone's status bar/notches */
-        padding-top: 50px;
-      }
-      .globe-frame {
-        zoom: 0.7;
-        -moz-transform: scale(0.7);
-        width: 142.8%;
-        height: 142.8%;
-      }
-    }
-
-    /* CHART & VIDEO STYLING */
-    .chart-outer-container, 
-    .video-trailer-container {
+    /* 1. Global Widget Container (Unified) */
+    .responsive-widget-container {
       width: 100%;
       max-width: 1000px;
       margin: 2rem auto 0;
+      background: #000;
       border-radius: 12px;
       overflow: hidden;
-      background: #000;
       border: 1px solid rgba(0, 255, 102, 0.1);
     }
 
-    #dextools-widget-container {
+    /* 2. Proportional Scaling (Keeps Timeline & X visible) */
+    .aspect-ratio-box {
       position: relative;
       width: 100%;
-      height: 600px;
-    }
-
-    .video-aspect-wrapper {
-      position: relative;
-      width: 100%;
-      padding-bottom: 56.25%; 
+      /* 75% creates a 4:3 view which is ideal for the globe UI */
+      padding-bottom: 75%; 
       height: 0;
     }
 
-    .video-aspect-wrapper iframe {
+    .aspect-ratio-box iframe {
       position: absolute;
       top: 0;
       left: 0;
@@ -442,8 +393,20 @@ animation: none !important;
       border: 0;
     }
 
+    /* 3. Chart specific height (Not aspect ratio dependent) */
+    .chart-box {
+      width: 100%;
+      height: 600px;
+    }
+
+    /* 4. Mobile Refinements */
     @media (max-width: 768px) {
-      #dextools-widget-container {
+      .aspect-ratio-box {
+        /* For mobile, we make it even taller (100% = square) 
+           to ensure the timeline and X-button have plenty of room */
+        padding-bottom: 110%; 
+      }
+      .chart-box {
         height: 500px;
       }
     }
