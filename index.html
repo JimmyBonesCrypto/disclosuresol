@@ -350,15 +350,9 @@ animation: none !important;
         <iframe src="https://ufo.gpt2077.com/" class="globe-frame" frameborder="0" allowfullscreen></iframe>
       </div>
 
-      <!-- DEXSCREENER LIVE CHART -->
-      <div class="chart-container pt-8 pb-12">
-        <div id="dexscreener-embed" class="relative w-full rounded-2xl overflow-hidden border border-alien/20 shadow-[0_0_30px_rgba(0,255,153,0.15)] bg-black">
-          <iframe 
-            src="https://dexscreener.com/solana/FpBhnZLzHjgPrc69vkimPtHCwN4xoeX3RUhDa3Bpump?embed=1&theme=dark&trades=0&info=0" 
-            style="width:100%; height:600px; border:none;"
-            loading="lazy">
-          </iframe>
-        </div>
+      <!-- BASIC DEXSCREENER WIDGET -->
+      <div id="dexscreener-embed" style="position:relative;width:100%;max-width:1000px;margin:2rem auto;height:600px;">
+        <iframe src="https://dexscreener.com/solana/FpBhnZLzHjgPrc69vkimPtHCwN4xoeX3RUhDa3Bpump?embed=1&theme=dark" style="position:absolute;width:100%;height:100%;top:0;left:0;border:0;"></iframe>
       </div>
 
     </div>
@@ -381,17 +375,9 @@ animation: none !important;
   border: none;
 }
 
-.chart-container {
-  width: 100%;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-/* Target the narrow outer screen (Z Fold 6 / Small Phones) */
 @media (max-width: 450px) {
-  .globe-container {
-    height: 400px;
-  }
+  .globe-container { height: 400px; }
+  #dexscreener-embed { height: 450px !important; }
   .globe-frame {
     zoom: 0.75;
     -moz-transform: scale(0.75);
@@ -399,20 +385,9 @@ animation: none !important;
     width: 133.33%;
     height: 133.33%;
   }
-  #dexscreener-embed iframe {
-    height: 450px !important;
-  }
-}
-
-/* Tablet / Unfolded view */
-@media (min-width: 451px) and (max-width: 950px) {
-  .globe-container {
-    height: 500px;
-  }
 }
 </style>
 </section>
-
 
 
 
