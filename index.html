@@ -357,6 +357,12 @@ animation: none !important;
         </div>
       </div>
 
+      <div class="video-trailer-container">
+        <div class="video-aspect-wrapper">
+          <iframe src="https://www.youtube.com/embed/SCYT8vb2siQ?si=84Wkh3JJQxOqgASt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -378,8 +384,9 @@ animation: none !important;
       border: none;
     }
 
-    /* DEXTools Container Styling */
-    .chart-outer-container {
+    /* DEXTools & Video Shared Outer Styling */
+    .chart-outer-container, 
+    .video-trailer-container {
       width: 100%;
       max-width: 1000px;
       margin: 2rem auto 0;
@@ -389,20 +396,37 @@ animation: none !important;
       border: 1px solid rgba(0, 255, 102, 0.1);
     }
 
+    /* Chart Height Logic */
     #dextools-widget-container {
       position: relative;
       width: 100%;
-      height: 600px; /* Default height for PC */
+      height: 600px;
     }
 
-    /* Mobile Logic for Chart */
+    /* Responsive Video Logic (maintains 16:9 ratio) */
+    .video-aspect-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+    }
+
+    .video-aspect-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Mobile Logic */
     @media (max-width: 768px) {
       #dextools-widget-container {
-        height: 500px; /* Slightly shorter for mobile to avoid cutoff */
+        height: 500px;
       }
     }
 
-    /* Mobile Logic for Globe */
     @media (max-width: 450px) {
       .globe-container {
         height: 450px;
@@ -416,7 +440,6 @@ animation: none !important;
       }
     }
 
-    /* Tablet view for Globe */
     @media (min-width: 451px) and (max-width: 950px) {
       .globe-container {
         height: 550px;
