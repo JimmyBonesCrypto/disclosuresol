@@ -342,20 +342,21 @@ animation: none !important;
         </a>
       </div>
 
-      <div class="responsive-widget-container">
-        <div class="aspect-ratio-box">
-          <iframe src="https://ufo.gpt2077.com/" frameborder="0" allowfullscreen></iframe>
+      <div class="widget-wrapper">
+        <div class="globe-scroll-container">
+          <iframe src="https://ufo.gpt2077.com/" class="globe-iframe" frameborder="0" allowfullscreen></iframe>
         </div>
+        <p class="text-xs text-gray-500 mt-2 block sm:hidden">↔ Scroll globe to view all data</p>
       </div>
 
-      <div class="responsive-widget-container">
-        <div class="chart-box">
+      <div class="widget-wrapper">
+        <div class="chart-container">
           <iframe title="DEXTools Trading Chart" src="https://www.dextools.io/widgets/en/solana/pe-light/97j7ju8ros5RCP7uE9k3zVAruQXDkGAK8EqVwf9AYkjf?theme=dark&chartType=1&chartResolution=15&drawingToolbars=false" style="border:0; width:100%; height:100%;"></iframe>
         </div>
       </div>
 
-      <div class="responsive-widget-container">
-        <div class="aspect-ratio-box">
+      <div class="widget-wrapper">
+        <div class="trailer-aspect-ratio">
           <iframe src="https://www.youtube.com/embed/SCYT8vb2siQ?si=84Wkh3JJQxOqgASt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
       </div>
@@ -364,50 +365,66 @@ animation: none !important;
   </div>
 
   <style>
-    /* 1. Global Widget Container (Unified) */
-    .responsive-widget-container {
+    /* Global Section Container Styling */
+    .widget-wrapper {
       width: 100%;
       max-width: 1000px;
-      margin: 2rem auto 0;
+      margin: 2.5rem auto 0;
       background: #000;
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      border: 1px solid rgba(0, 255, 102, 0.1);
+      border: 1px solid rgba(0, 255, 102, 0.15);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
 
-    /* 2. Proportional Scaling (Keeps Timeline & X visible) */
-    .aspect-ratio-box {
-      position: relative;
+    /* Globe Fixed Logic: Prevent Smushing */
+    .globe-scroll-container {
       width: 100%;
-      /* 75% creates a 4:3 view which is ideal for the globe UI */
-      padding-bottom: 75%; 
-      height: 0;
+      height: 750px; /* Desktop Height */
+      overflow: hidden;
+      position: relative;
     }
 
-    .aspect-ratio-box iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .globe-iframe {
       width: 100%;
       height: 100%;
-      border: 0;
+      border: none;
     }
 
-    /* 3. Chart specific height (Not aspect ratio dependent) */
-    .chart-box {
+    /* DEXTools Chart Logic */
+    .chart-container {
       width: 100%;
       height: 600px;
     }
 
-    /* 4. Mobile Refinements */
+    /* Video Logic */
+    .trailer-aspect-ratio {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+    }
+    .trailer-aspect-ratio iframe {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+    }
+
+    /* Mobile Specific Fixes */
     @media (max-width: 768px) {
-      .aspect-ratio-box {
-        /* For mobile, we make it even taller (100% = square) 
-           to ensure the timeline and X-button have plenty of room */
-        padding-bottom: 110%; 
+      .globe-scroll-container {
+        height: 600px; /* Slightly shorter on mobile but enough for UI */
+        overflow-x: auto; /* Allows horizontal swipe if the widget is too wide */
+        -webkit-overflow-scrolling: touch;
       }
-      .chart-box {
-        height: 500px;
+      
+      .globe-iframe {
+        /* Force a minimum width on mobile so the timeline doesn't compress */
+        min-width: 450px; 
+        height: 100%;
+      }
+
+      .chart-container {
+        height: 450px;
       }
     }
   </style>
